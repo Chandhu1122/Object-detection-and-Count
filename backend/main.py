@@ -18,6 +18,13 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from queue import Queue
+from typing import Optional, List, Dict, Set
+
+# DeepSORT tracker
+try:
+    from deep_sort_realtime.deepsort_tracker import DeepSort
+except Exception as e:
+    raise ImportError("Please install deep_sort_realtime: pip install deep_sort_realtime") from e
 
 # Load environment variables
 load_dotenv()
@@ -79,7 +86,7 @@ class PosixPathPatch(pathlib.PosixPath):
         return pathlib.WindowsPath(*args, **kwargs)
 pathlib.PosixPath = PosixPathPatch
 
-FILE = os.path.abspath(_file_)
+FILE = os.path.abspath(__file__)
 ROOT = os.path.dirname(FILE)
 YOLOV5_FULLPATH = os.path.join(ROOT, YOLOV5_PATH)
 if YOLOV5_FULLPATH not in sys.path:
