@@ -105,7 +105,7 @@ export default function App() {
     showToast('Video detection started successfully!', 'success');
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/start-detection', {
+      const response = await axios.post('https://box-detection-api.onrender.com/start-detection', {
         video_url: videoLink,
         supervisor_name: finalSupervisor,
         vehicle_number: finalVehicle,
@@ -127,7 +127,7 @@ export default function App() {
     const finalVehicle = vehicle === 'Other' ? customVehicle : vehicle;
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/stop-detection', {
+      const response = await axios.post('https://box-detection-api.onrender.com/stop-detection', {
         vehicle_number: finalVehicle,
         supervisor_name: finalSupervisor,
       });
